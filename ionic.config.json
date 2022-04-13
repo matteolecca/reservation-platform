@@ -1,0 +1,7 @@
+{
+  "name": "desk-reservation-platform",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
