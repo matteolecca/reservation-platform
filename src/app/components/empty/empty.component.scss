@@ -1,0 +1,35 @@
+ion-img{
+    max-width: 200px;
+    margin: 0 auto;
+}
+
+ion-grid{
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: show 1s forwards;
+}
+
+:host {
+    height: 100%;
+}
+
+@keyframes show{
+from {
+  transform: translateY(50px);
+  opacity: 0;
+}
+to{
+  transform: translateY(0);
+  opacity: 1;
+}
+}
+@keyframes showConfirm{
+from {
+  opacity: 0;
+}
+to{
+  opacity: 1;
+}
+}

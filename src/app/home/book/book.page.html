@@ -1,0 +1,69 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>book</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Book</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <form *ngIf="!booked" [formGroup]="form" (ngSubmit)="onSubmit()" novalidate>
+    <ion-item class="form-item" (click)="itemTap()" *ngIf="offices">
+      <ion-label>Office</ion-label>
+      <ion-select formControlName="site" placeholder="Select Office">
+        <ion-select-option *ngFor="let office of offices" [value]="office.id">{{office.officeTitle}}</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-item *ngIf="!offices" lines="none">
+      <ion-skeleton-text animated style="width: 100%; height: 35px;"></ion-skeleton-text>
+    </ion-item>
+    <div class="date-container" *ngIf="this.form.controls.site.valid">
+      <ion-item class="form-item" (click)="itemTap()">
+        <ion-button fill="clear" id="open-modal">
+          <ion-label>{{ (this.form.controls.date.value | date) || "Date" }}</ion-label>
+          <ion-icon slot="start" icon="calendar"></ion-icon>
+        </ion-button>
+      </ion-item>
+      <ion-modal trigger="open-modal">
+        <ng-template>
+          <ion-datetime 
+          formControlName="date" 
+          #datePicker 
+          presentation="date" 
+          showDefaultButtons=true
+          [min]="minDate"
+          ></ion-datetime>
+        </ng-template>
+      </ion-modal>
+    </div>
+
+    <ion-item class="form-item" (click)="itemTap()" *ngIf="desks && form.controls.date.valid">
+      <ion-label>Desk</ion-label>
+      <ion-select formControlName="desk" placeholder="Select Desk">
+        <ion-select-option *ngFor="let desk of desks" [value]="desk.id">{{desk.nr}}</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-item *ngIf="!desks && this.form.controls.date.valid " lines="none">
+      <ion-skeleton-text animated style="width: 100%; height: 35px;"></ion-skeleton-text>
+    </ion-item>
+    <ion-button [disabled]="!this.form.valid" class="ion-padding" (click)="onSubmit()" expand="block">
+      Book
+    </ion-button>
+  </form>
+
+  <ion-content *ngIf="booked">
+    <div class="confirm">
+      <ion-img src="../../../assets/icon/done-icon.svg"></ion-img>
+      <ion-text color="primary">
+        <p>Booked reservation confirmed</p>
+      </ion-text>
+      <ion-button (click)="navigateAway()" expand="block" >
+        Go to My Bookings
+      </ion-button>
+    </div>
+  </ion-content>
+
+</ion-content>

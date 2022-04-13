@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AAAA,AAAA,KAAK,CAAA;EACD,SAAS,EAAE,gBAAgB;CAC9B;;AAED,UAAU,CAAV,IAAU;EACN,IAAI;IACA,OAAO,EAAE,CAAC;IACV,SAAS,EAAE,UAAS;;EAExB,EAAE;IACE,OAAO,EAAE,CAAC;IACV,SAAS,EAAE,QAAQ",
+    "sources": [
+        "big-slot.component.scss"
+    ],
+    "names": [],
+    "file": "big-slot.component.css"
+}

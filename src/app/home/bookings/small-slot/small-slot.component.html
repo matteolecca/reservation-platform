@@ -1,0 +1,7 @@
+<ion-item *ngIf="!loading" button  (click)="click()">
+  <ion-icon  slot="start" name="calendar-outline" color="danger"></ion-icon>
+  <ion-label>
+    <h3>{{slot.date | date}}</h3>
+    <p>Desk: {{slot.desk}}</p>
+  </ion-label>
+</ion-item>

@@ -1,0 +1,10 @@
+ion-item,
+ion-list,
+ion-list-header,
+ion-row,
+ion-col,
+ion-grid,
+ion-item-divider {
+  --background: var(--ion-color-step-100);
+}
+/*# sourceMappingURL=edit-skeleton.component.css.map */

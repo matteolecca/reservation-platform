@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "",
+    "sources": [
+        "small-slot.component.scss"
+    ],
+    "names": [],
+    "file": "small-slot.component.css"
+}

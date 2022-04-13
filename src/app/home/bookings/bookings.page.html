@@ -1,0 +1,28 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Your Booked slots</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content >
+  <ion-refresher slot="fixed" (ionRefresh)="getBookings($event)" pullFactor="0.8" pullMin="60" pullMax="120">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Booked Slots</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <app-big-slot *ngIf="bookings?.length" [slot]="this.nextBooking" [loading]="this.loading" [openSlot]="presentModal"></app-big-slot>
+  <ion-list *ngIf="bookings?.length">
+    <ion-list-header>
+      <ion-label>Next Slots</ion-label>
+      <ion-button>See past slots</ion-button>
+    </ion-list-header>
+    <app-small-slot *ngFor="let slot of bookings?.slice(1,bookings.length )" [slot]="slot" [presentModal]="presentModal"
+      [loading]="this.loading">
+    </app-small-slot>
+  </ion-list>
+  <app-empty *ngIf="(!bookings || !bookings.length) && !loading"></app-empty>
+  <app-slots-sleketon *ngIf="loading"></app-slots-sleketon>
+</ion-content>
+<app-error  *ngIf="error"></app-error>

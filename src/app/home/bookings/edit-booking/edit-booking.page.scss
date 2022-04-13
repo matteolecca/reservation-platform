@@ -1,0 +1,18 @@
+ion-content{
+    position: relative;
+}
+ion-spinner{
+    position: fixed;
+    top: 20%;
+    left: 50%;
+    transform: translate(-50%);
+}
+ion-item,
+ion-list,
+ion-list-header,
+ion-row,
+ion-col,
+ion-grid,
+ion-item-divider{
+    --background: var(--ion-color-step-100);
+  }

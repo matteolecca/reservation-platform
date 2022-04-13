@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AACA,AAAA,QAAQ;AACR,QAAQ;AACR,eAAe;AACf,OAAO;AACP,OAAO;AACP,QAAQ;AACR,gBAAgB,CAAA;EACZ,YAAY,CAAA,0BAAC;CACd",
+    "sources": [
+        "edit-skeleton.component.scss"
+    ],
+    "names": [],
+    "file": "edit-skeleton.component.css"
+}

@@ -1,0 +1,11 @@
+.round-skeleton {
+  --border-radius: 50%;
+}
+
+.button-skeleton {
+  width: 90%;
+  height: 2.8em;
+  border-radius: 10px;
+  margin: 16px auto;
+}
+/*# sourceMappingURL=user-skeleton.component.css.map */

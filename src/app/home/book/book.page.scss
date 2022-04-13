@@ -1,0 +1,61 @@
+ion-datetime {
+    height: auto;
+  width: auto;
+  max-width: 350px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(288px, 1fr));
+  grid-gap: 0 10px;
+}
+
+ion-modal {
+  --width: 290px;
+  --height: 382px;
+  --border-radius: 8px;
+}
+ion-modal ion-datetime {
+  height: 382px;
+}
+.form-item{
+  animation: show .5s forwards;
+}
+.confirm{
+  animation: showConfirm .5s forwards;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  height: 100%;
+  row-gap: 5%;
+  ion-img{
+    animation: show 1s forwards;
+    width: 55%;
+    max-width: 400px;
+  }
+  ion-button{
+    animation: show 1s forwards;
+  }
+  ion-p{
+    animation: show 1s forwards;
+  }
+}
+@keyframes show{
+  from {
+    transform: translateY(50px);
+    opacity: 0;
+  }
+  to{
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+@keyframes showConfirm{
+  from {
+    opacity: 0;
+  }
+  to{
+    opacity: 1;
+  }
+}
