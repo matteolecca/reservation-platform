@@ -20,26 +20,14 @@
     <ion-item *ngIf="!offices" lines="none">
       <ion-skeleton-text animated style="width: 100%; height: 35px;"></ion-skeleton-text>
     </ion-item>
-    <div class="date-container" *ngIf="this.form.controls.site.valid">
+    <div class="date-container" *ngIf="!this.form.controls.site.valid">
       <ion-item class="form-item" (click)="itemTap()">
-        <ion-button fill="clear" id="open-modal">
+        <ion-button fill="clear" id="date">
           <ion-label>{{ (this.form.controls.date.value | date) || "Date" }}</ion-label>
           <ion-icon slot="start" icon="calendar"></ion-icon>
         </ion-button>
       </ion-item>
-      <ion-modal trigger="open-modal">
-        <ng-template>
-          <ion-datetime 
-          formControlName="date" 
-          #datePicker 
-          presentation="date" 
-          showDefaultButtons=true
-          [min]="minDate"
-          ></ion-datetime>
-        </ng-template>
-      </ion-modal>
     </div>
-
     <ion-item class="form-item" (click)="itemTap()" *ngIf="desks && form.controls.date.valid">
       <ion-label>Desk</ion-label>
       <ion-select formControlName="desk" placeholder="Select Desk">
@@ -52,15 +40,21 @@
     <ion-button [disabled]="!this.form.valid" class="ion-padding" (click)="onSubmit()" expand="block">
       Book
     </ion-button>
+    <ion-modal  #ionModal trigger="date">
+      <ng-template>
+        <ion-datetime [ngClass]="[showClass]" ion-datetime [isDateEnabled]="dateEnabled"
+          formControlName="date" #dateTime presentation="date" showDefaultButtons=true [min]="minDate"
+          first-day-of-week="1"></ion-datetime>
+      </ng-template>
+    </ion-modal>
   </form>
-
   <ion-content *ngIf="booked">
     <div class="confirm">
       <ion-img src="../../../assets/icon/done-icon.svg"></ion-img>
       <ion-text color="primary">
         <p>Booked reservation confirmed</p>
       </ion-text>
-      <ion-button (click)="navigateAway()" expand="block" >
+      <ion-button (click)="navigateAway()" expand="block">
         Go to My Bookings
       </ion-button>
     </div>

@@ -11,6 +11,10 @@ const routes: Routes = [
   {
     path: 'edit-booking',
     loadChildren: () => import('./edit-booking/edit-booking.module').then( m => m.EditBookingPageModule)
+  },
+  {
+    path: 'bookings-list',
+    loadChildren: () => import('./bookings-list/bookings-list.module').then( m => m.BookingsListPageModule)
   }
 ];
 

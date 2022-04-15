@@ -13,6 +13,9 @@ export class BookingsApiService {
   getBookings() {
     return this.httpClient.get<Booking[]>('http://192.168.1.180:8080/bookings');
   }
+  getPastBookings(offset: number) {
+    return this.httpClient.get<Booking[]>(`http://192.168.1.180:8080/bookings?type=past&offset=${offset}`);
+  }
   getBooking(id: string) {
     return this.httpClient.get<Booking>(`http://192.168.1.180:8080/bookings/${id}`);
   }

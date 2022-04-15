@@ -1,4 +1,5 @@
 {
+	"appId": "matteolecca-desk-reservation-platform",
   "name": "desk-reservation-platform",
   "integrations": {
     "capacitor": {}

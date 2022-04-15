@@ -1,6 +1,7 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { withModule } from '@angular/core/testing';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { IonDatetime, LoadingController, NavController } from '@ionic/angular';
+import { Animation, AnimationController, IonDatetime, IonModal, LoadingController, ModalController, NavController } from '@ionic/angular';
 import { Desk } from 'src/app/interfaces/desks';
 import { Offices } from 'src/app/interfaces/offices';
 import { AltertService } from 'src/app/services/alert.service';
@@ -17,7 +18,8 @@ import { ToastService } from 'src/app/services/toast.service';
   styleUrls: ['./book.page.scss'],
 })
 export class BookPage implements AfterViewInit, OnInit {
-  @ViewChild('datePicker') datePicker: IonDatetime;
+  @ViewChild(IonDatetime) datePicker: IonDatetime;
+  @ViewChild(IonModal) ionModal: IonModal;
   loading: boolean;
   loadingDesks: boolean;
   offices: Offices[];
@@ -25,6 +27,8 @@ export class BookPage implements AfterViewInit, OnInit {
   form: FormGroup;
   booked: boolean;
   minDate: string;
+  showDate = false;
+  showClass = 'hide';
   constructor(
     private officeService: OfficesService,
     private formBuilder: FormBuilder,
@@ -33,16 +37,33 @@ export class BookPage implements AfterViewInit, OnInit {
     private navController: NavController,
     private toastService: ToastService,
     private tap: TapService,
-    private bookingsService: BookingsService
-  ) { }
+    private bookingsService: BookingsService,
+    private modalController: ModalController,
+    private animationCtrl: AnimationController
+  ) {
+  }
   ngOnInit(): void {
     this.setForm();
     this.loadOffices();
   }
+
+  registerModalSubscriptions() {
+    this.ionModal.willDismiss.subscribe(e => {
+      this.showClass = 'hide';
+    });
+    this.ionModal.willPresent.subscribe(e => this.showClass = 'show');
+
+  }
+
   ngAfterViewInit(): void {
+    this.registerModalSubscriptions();
     this.form.valueChanges.subscribe((formValues) => {
       this.setDate();
     });
+  }
+  dateEnabled(date: any) {
+    const d = new Date(date);
+    return d.getDay() !== 6 && d.getDay() !== 0;
   }
 
   setDate() {
@@ -110,7 +131,8 @@ export class BookPage implements AfterViewInit, OnInit {
     this.booked = false;
     this.navController.navigateBack('home/bookings');
   }
-  itemTap(){
+  itemTap() {
     this.tap.tapSelect();
   }
+
 }

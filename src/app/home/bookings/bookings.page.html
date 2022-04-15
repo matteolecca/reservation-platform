@@ -16,7 +16,7 @@
   <ion-list *ngIf="bookings?.length">
     <ion-list-header>
       <ion-label>Next Slots</ion-label>
-      <ion-button>See past slots</ion-button>
+      <ion-button routerLink="bookings-list" >See past slots</ion-button>
     </ion-list-header>
     <app-small-slot *ngFor="let slot of bookings?.slice(1,bookings.length )" [slot]="slot" [presentModal]="presentModal"
       [loading]="this.loading">

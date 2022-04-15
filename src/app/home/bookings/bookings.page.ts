@@ -1,5 +1,6 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { ModalController, RefresherCustomEvent } from '@ionic/angular';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { RouterOutlet } from '@angular/router';
+import { AnimationController, IonModal, IonRouterOutlet, ModalController, RefresherCustomEvent } from '@ionic/angular';
 import { Subscription } from 'rxjs';
 import { Booking } from 'src/app/interfaces/booking';
 import { BookingsApiService } from 'src/app/services/api/bookings-api.service';
@@ -14,6 +15,7 @@ import { EditBookingPage } from './edit-booking/edit-booking.page';
   styleUrls: ['./bookings.page.scss'],
 })
 export class BookingsPage implements OnInit, OnDestroy {
+
   bookings: Booking[];
   nextBooking: Booking;
   loading = false;
@@ -24,7 +26,8 @@ export class BookingsPage implements OnInit, OnDestroy {
     private bookingsService: BookingsService,
     private bookingsApiService: BookingsApiService,
     private toastService: ToastService,
-    private tap: TapService
+    private tap: TapService,
+    private animationController: AnimationController
   ) {
     this.bookingSubject = bookingsService.getBookingSubject().subscribe((subscription) => {
       this.getBookings();
@@ -65,9 +68,10 @@ export class BookingsPage implements OnInit, OnDestroy {
       component: EditBookingPage,
       breakpoints: [0, 0.4],
       initialBreakpoint: 0.4,
-      backdropDismiss: false,
+      backdropDismiss: true,
       componentProps,
-      handle: true,
+      // presentingElement: this.routerOutlet.parentOutlet.nativeEl,
+      swipeToClose: true,
     }).then((modal) => {
       modal.present();
     });
