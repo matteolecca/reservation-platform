@@ -1,11 +1,13 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { LocalNotifications } from '@capacitor/local-notifications';
 import { IonInfiniteScroll, LoadingController } from '@ionic/angular';
 import { Booking } from 'src/app/interfaces/booking';
-import { BookingsApiService } from 'src/app/services/api/bookings-api.service';
+import { AltertService } from 'src/app/services/alert.service';
+import { BookingsApiService } from 'src/app/api/bookings-api.service';
 import { BookingsService } from 'src/app/services/bookings.service';
 import { LoadingControllerService } from 'src/app/services/loading-controller.service';
+import { LocalNotificationsService } from 'src/app/services/local-notifications.service';
 import { ToastService } from 'src/app/services/toast.service';
-
 @Component({
   selector: 'app-bookings-list',
   templateUrl: './bookings-list.page.html',
@@ -22,14 +24,23 @@ export class BookingsListPage implements OnInit {
     private bookingsService: BookingsService,
     private loadingController: LoadingControllerService,
     private toastService: ToastService,
+    private alertService: AltertService,
+    private localNotifications: LocalNotificationsService,
   ) { }
 
   async ngOnInit() {
+    await this.localNotifications.getPermission();
     this.loadBookings(0);
+  }
+  async showNot() {
+    await this.localNotifications.showLocalNotification();
   }
   async loadBookings(offset: number) {
     this.loadComplete = false;
     this.offset = 0;
+    if (this.infiniteScroll) {
+      this.infiniteScroll.disabled = false;
+    }
     const spinner = await this.loadingController.setupLoadingController('Loading slots...');
     spinner.present();
     try {
@@ -40,6 +51,12 @@ export class BookingsListPage implements OnInit {
       spinner.dismiss();
     }
   }
+  onDelete(id: number) {
+    this.alertService.presentAlert([
+      { id: 'back-button', text: 'Dismiss', handler: () => { } },
+      { id: 'delete-button', text: 'Delete', handler: () => this.deleteBooking(id) },
+    ]);
+  }
   async deleteBooking(id: number) {
     const spinner = await this.loadingController.setupLoadingController('Deleting...');
     const toast = await this.toastService.setupToast('Error deleting');
@@ -48,8 +65,8 @@ export class BookingsListPage implements OnInit {
     try {
       await this.bookingsApiService.deleteBooking(id).toPromise();
       this.slots = this.slots.filter(slot => slot.id !== id);
+      toastSuccess.present();
     } catch (error) {
-      console.error('ERROr deleting');
       toast.present();
     }
     finally {
@@ -75,5 +92,9 @@ export class BookingsListPage implements OnInit {
       this.infiniteScroll.complete();
     }
   }
+  sort = () => {
+    console.log(this.slots);
+    this.slots.sort((first, second) => new Date(first.date).getTime() - new Date(second.date).getTime());
+  };
 
 }

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivate, RouterStateSnapshot, UrlTree } from '@angular/router';
 import { NavController } from '@ionic/angular';
-import { AuthApiService } from '../services/api/auth-api.service';
+import { AuthApiService } from '../api/auth-api.service';
 import { StorageService } from '../services/storage.service';
 
 @Injectable({
@@ -18,7 +18,6 @@ export class AuthGuard implements CanActivate {
     state: RouterStateSnapshot
   ): Promise<any> {
     const token = await this.storageService.get('token');
-    console.log('GUARD', token);
     if (token) {
       try {
         const { valid } = await this.authApiService.validateToken(token).toPromise();
@@ -29,7 +28,6 @@ export class AuthGuard implements CanActivate {
         this.navController.navigateRoot('/login');
       }
     }
-    this.navController.navigateRoot('/login');
     return false;
   }
 }

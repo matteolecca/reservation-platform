@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { NavController } from '@ionic/angular';
-import { AuthApiService } from 'src/app/services/api/auth-api.service';
+import { Keyboard, KeyboardResize } from '@capacitor/keyboard';
+import { NavController, Platform } from '@ionic/angular';
+import { AuthApiService } from 'src/app/api/auth-api.service';
 import { LoadingControllerService } from 'src/app/services/loading-controller.service';
 import { StorageService } from 'src/app/services/storage.service';
 import { ToastService } from 'src/app/services/toast.service';
@@ -11,7 +12,7 @@ import { ToastService } from 'src/app/services/toast.service';
   templateUrl: './login.page.html',
   styleUrls: ['./login.page.scss'],
 })
-export class LoginPage implements OnInit {
+export class LoginPage implements OnInit, OnDestroy {
   form: FormGroup;
   spinner: HTMLIonLoadingElement;
   toast: HTMLIonToastElement;
@@ -22,15 +23,35 @@ export class LoginPage implements OnInit {
     private loadingControllerService: LoadingControllerService,
     private toastService: ToastService,
     private storageService: StorageService,
+    private platform: Platform
   ) { }
+  ngOnDestroy(): void {
+    Keyboard.removeAllListeners();
+  }
 
   ngOnInit() {
     this.form = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6)]]
     });
+    // this.kList();
   }
-  signup(){}
+
+  kList() {
+    Keyboard.addListener('keyboardWillShow', keyboard => {
+      const { keyboardHeight } = keyboard;
+      const h = this.platform.height() - (keyboardHeight);
+      document.body.style.height = `${h}px`;
+    });
+
+    Keyboard.addListener('keyboardWillHide', () => {
+      const h = this.platform.height();
+      document.body.style.height = `${h}px`;
+    });
+  }
+
+
+  signup() { }
   async onSubmit() {
     this.spinner = await this.loadingControllerService.setupLoadingController('Logging you in');
     this.toast = await this.toastService.setupToast('Invalid data', 2000);

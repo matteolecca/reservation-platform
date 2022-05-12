@@ -1,7 +1,12 @@
 .card{
     animation: show 1s forwards;
 }   
-
+ion-card-subtitle{
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    column-gap: 10px;
+}
 @keyframes show{
     from {
         opacity: 0;

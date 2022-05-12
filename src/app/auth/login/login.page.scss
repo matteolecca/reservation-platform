@@ -11,7 +11,39 @@ ion-img{
     max-width: 200px;
     margin: 20px auto;
 }
+ion-toolbar{
+    --background: transparent;
 
+    --ion-color-base: transparent !important;
+}
+.input{
+    --background: var(--ion-color-step-100);
+    border: .5px solid var(--ion-color-step-200);
+    border-radius: 5px;
+    box-sizing: border-box;
+    padding: 0 3px;
+    padding: 0;
+}
+.divider{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    span{
+        flex: 1 1;
+        height: .5px;
+        background: var(--ion-color-step-200);
+        opacity: .6;
+    }
+    label{
+        margin: 0 20px;
+        color: var(--ion-color-step-500);
+    }
+}
+.signup-row{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 form{
     height: 100%;
     display: flex;

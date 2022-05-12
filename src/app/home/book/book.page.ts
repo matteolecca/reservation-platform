@@ -5,7 +5,7 @@ import { Animation, AnimationController, IonDatetime, IonModal, LoadingControlle
 import { Desk } from 'src/app/interfaces/desks';
 import { Offices } from 'src/app/interfaces/offices';
 import { AltertService } from 'src/app/services/alert.service';
-import { BookingsApiService } from 'src/app/services/api/bookings-api.service';
+import { BookingsApiService } from 'src/app/api/bookings-api.service';
 import { BookingsService } from 'src/app/services/bookings.service';
 import { LoadingControllerService } from 'src/app/services/loading-controller.service';
 import { OfficesService } from 'src/app/services/offices.service';
@@ -28,7 +28,7 @@ export class BookPage implements AfterViewInit, OnInit {
   booked: boolean;
   minDate: string;
   showDate = false;
-  showClass = 'hide';
+  showClass = 'show';
   constructor(
     private officeService: OfficesService,
     private formBuilder: FormBuilder,
@@ -48,10 +48,10 @@ export class BookPage implements AfterViewInit, OnInit {
   }
 
   registerModalSubscriptions() {
-    this.ionModal.willDismiss.subscribe(e => {
+    this.ionModal?.willDismiss.subscribe(e => {
       this.showClass = 'hide';
     });
-    this.ionModal.willPresent.subscribe(e => this.showClass = 'show');
+    this.ionModal?.willPresent.subscribe(e => this.showClass = 'show');
 
   }
 

@@ -7,6 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { BookingsListPageRoutingModule } from './bookings-list-routing.module';
 
 import { BookingsListPage } from './bookings-list.page';
+import { FilterComponent } from './filter/filter.component';
 
 @NgModule({
   imports: [
@@ -15,6 +16,6 @@ import { BookingsListPage } from './bookings-list.page';
     IonicModule,
     BookingsListPageRoutingModule
   ],
-  declarations: [BookingsListPage]
+  declarations: [BookingsListPage,FilterComponent]
 })
 export class BookingsListPageModule {}

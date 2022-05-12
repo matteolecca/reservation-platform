@@ -1,7 +1,7 @@
 import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { from, Observable } from 'rxjs';
-import { StorageService } from '../../storage.service';
+import { StorageService } from '../../services/storage.service';
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +15,6 @@ export class InterceptorService implements HttpInterceptor {
 
   setToken = async (req: HttpRequest<any>, next: HttpHandler) => {
     const token = await this.storageService.get('token');
-    console.log('TOKEN', token);
     if (token) {
       req = req.clone({
         setHeaders: {

@@ -14,7 +14,7 @@ ion-modal ion-datetime {
   --border-radius: 10px;
 }
 .show{
-  animation: showConfirm 1s forwards;
+  animation: showConfirm 2s forwards;
 }
 .hide{
   animation: hide 1s forwards;
@@ -29,7 +29,6 @@ ion-modal ion-datetime {
   justify-content: center;
   flex-direction: column;
   height: 100%;
-  row-gap: 5%;
   ion-img{
     animation: show 1s forwards;
     width: 55%;

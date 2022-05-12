@@ -15,4 +15,12 @@ export class AltertService {
       buttons
     }).then((aler) => aler.present());
   }
+  presentNotificationAlert = (title: string, body: string) => {
+    this.alertController.create({
+      cssClass: 'class',
+      animated: true,
+      header: title,
+      message: body
+    }).then((aler) => aler.present());
+  };
 }

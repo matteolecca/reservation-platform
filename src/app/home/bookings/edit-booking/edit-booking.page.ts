@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { LoadingController, ModalController, NavParams } from '@ionic/angular';
 import { Booking } from 'src/app/interfaces/booking';
 import { AltertService } from 'src/app/services/alert.service';
-import { BookingsApiService } from 'src/app/services/api/bookings-api.service';
+import { BookingsApiService } from 'src/app/api/bookings-api.service';
 import { BookingsService } from 'src/app/services/bookings.service';
 import { LoadingControllerService } from 'src/app/services/loading-controller.service';
 import { ToastService } from 'src/app/services/toast.service';
@@ -29,19 +29,12 @@ export class EditBookingPage implements OnInit {
     await this.loadBooking();
   }
   async loadBooking() {
-    const { slotId } = this.navParams.data;
-    console.log('SLOT ID', slotId);
     this.loading = true;
-    try {
-      this.booking = await this.bookingApiService.getBooking(slotId).toPromise();
-      console.log(this.booking, this.loading);
-    } catch (error) {
-      console.error('Error loading');
-    }
-    finally {
+    const { id, date, desk, site } = this.navParams.data;
+    this.booking = { id, date, desk, site };
+    setTimeout(() => {
       this.loading = false;
-      console.log(this.booking, this.loading);
-    }
+    }, 1000);
   }
   setEdit() { }
   setDelete() {

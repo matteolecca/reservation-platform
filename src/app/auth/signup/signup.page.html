@@ -1,15 +1,23 @@
-<ion-header>
+<ion-header class="ion-no-border">
   <ion-toolbar>
-    <ion-title>Signup</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content class="ion-padding">
-  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <form [formGroup]="form" >
     <ion-grid>
       <ion-row>
         <ion-col size="12">
           <ion-img src="../../../assets/icon/login-icon.svg"></ion-img>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size="12">
+          <ion-item lines="none">
+            <ion-text >
+              <h3 style="font-weight: 700;">SIGNUP</h3>
+            </ion-text>
+          </ion-item>
         </ion-col>
       </ion-row>
       <ion-row>
@@ -46,7 +54,7 @@
           </ion-button>
         </ion-col>
       </ion-row>
-      <ion-button [disabled]="!form.valid" class="submit-button" type="submit" color="primary" expand="block">
+      <ion-button (click)="onSubmit()" role="submit" [disabled]="!form.valid" class="submit-button" type="submit" color="primary" expand="block">
         Signup
       </ion-button>
     </ion-grid>

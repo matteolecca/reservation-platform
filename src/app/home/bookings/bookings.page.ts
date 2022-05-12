@@ -3,7 +3,7 @@ import { RouterOutlet } from '@angular/router';
 import { AnimationController, IonModal, IonRouterOutlet, ModalController, RefresherCustomEvent } from '@ionic/angular';
 import { Subscription } from 'rxjs';
 import { Booking } from 'src/app/interfaces/booking';
-import { BookingsApiService } from 'src/app/services/api/bookings-api.service';
+import { BookingsApiService } from 'src/app/api/bookings-api.service';
 import { BookingsService } from 'src/app/services/bookings.service';
 import { TapService } from 'src/app/services/tap.service';
 import { ToastService } from 'src/app/services/toast.service';
@@ -36,7 +36,6 @@ export class BookingsPage implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.bookingSubject.unsubscribe();
   }
-
   ngOnInit() {
     this.getBookings();
   }
@@ -46,6 +45,7 @@ export class BookingsPage implements OnInit, OnDestroy {
     const toast = await this.toastService.setupToast('Loading error');
     try {
       const bookings = await this.bookingsApiService.getBookings().toPromise();
+      console.log(bookings);
       this.nextBooking = bookings[0];
       this.bookings = bookings;
     } catch (error) {
@@ -66,8 +66,8 @@ export class BookingsPage implements OnInit, OnDestroy {
   presentModal = (componentProps: any) => {
     this.modalCtrl.create({
       component: EditBookingPage,
-      breakpoints: [0, 0.4],
-      initialBreakpoint: 0.4,
+      breakpoints: [0, 0.5],
+      initialBreakpoint: 0.5,
       backdropDismiss: true,
       componentProps,
       // presentingElement: this.routerOutlet.parentOutlet.nativeEl,

@@ -1,12 +1,20 @@
 <ion-card class="card">
   <ion-card-header *ngIf="!loading">
-    <ion-card-title>DESK: {{slot.desk}}</ion-card-title>
-    <ion-card-subtitle>{{slot.date | date}}</ion-card-subtitle>
+    <ion-card-title>
+      {{slot.date | date}}
+    </ion-card-title>
+    <ion-card-subtitle>
+      <ion-icon name="location-outline"></ion-icon>
+      <ion-label>{{slot.site}}</ion-label>
+      <ion-icon name="desktop-outline"></ion-icon>
+      <ion-label>{{slot.desk}}</ion-label>
+    </ion-card-subtitle>
   </ion-card-header>
   <ion-card-content *ngIf="!loading">
-    <ion-button (click)="openSlot({slotId: this.slot.id})" expand="block">
-      Open
+    <ion-button (click)="openSlot(this.slot)" expand="block">
+      Open 
     </ion-button>
+    
   </ion-card-content>
   <app-big-slot-skeleton *ngIf="loading"></app-big-slot-skeleton>
 </ion-card>

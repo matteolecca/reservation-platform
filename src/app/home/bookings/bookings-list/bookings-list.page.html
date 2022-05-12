@@ -1,5 +1,6 @@
 <ion-header>
   <ion-toolbar>
+    <ion-title>Bookings List</ion-title>
     <ion-buttons slot="start">
       <ion-back-button defaultHref="home/bookings" color="danger" text=""></ion-back-button>
     </ion-buttons>
@@ -15,45 +16,27 @@
     <ion-list-header>
       <ion-label>Past Bookings</ion-label>
       <ion-buttons >
-        <ion-button (click)="onClick()">
+        <ion-button (click)="loadBookings(0)">
           <ion-icon name="refresh-outline"></ion-icon>
         </ion-button>
         <ion-button id="nested-button">
           <ion-icon name="filter-outline"></ion-icon>
         </ion-button>
-        <ion-popover trigger="nested-button" >
-          <ng-template class="popup">
-            <ion-content class="popup">
-              <ion-list>
-                <ion-list-header>
-                  <ion-label>Sort By</ion-label>
-                </ion-list-header>
-                <ion-item [button]="true" [detail]="false">
-                  <ion-label>Option 1</ion-label>
-                </ion-item>
-                <ion-item [button]="true" [detail]="false">
-                  <ion-label>Option 2</ion-label>
-                </ion-item>
-                <ion-item [button]="true" [detail]="true" id="nested-trigger">
-                  <ion-label>Option 3</ion-label>
-                </ion-item>
-              </ion-list>
-            </ion-content>
-          </ng-template>
-        </ion-popover>
+        <app-filter [sort]="sort"></app-filter>
       </ion-buttons>
     </ion-list-header>
     <ion-item-sliding *ngFor="let slot of slots" lines>
       <ion-item lines="none">
         <ion-icon slot="start" name="calendar-outline" color="danger"></ion-icon>
         <ion-label>
+          <h2>{{slot.site}}</h2>
           <h3>{{slot.date | date}}</h3>
           <p>Desk: {{slot.desk}}</p>
         </ion-label>
       </ion-item>
       <ion-item-options side="end">
-        <ion-item-option color="warning" (click)="deleteBooking(slot.id)">
-          <ion-icon color="danger" size="large" slot="start" name="trash"></ion-icon>
+        <ion-item-option color="danger" (click)="onDelete(slot.id)">
+            <ion-icon name="trash"></ion-icon>
         </ion-item-option>
       </ion-item-options>
     </ion-item-sliding>

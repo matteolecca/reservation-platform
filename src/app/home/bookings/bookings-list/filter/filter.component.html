@@ -1,0 +1,17 @@
+<ion-popover trigger="nested-button" >
+  <ng-template class="popup">
+    <ion-content class="popup">
+      <ion-list>
+        <ion-list-header>
+          <ion-label>Ordina</ion-label>
+        </ion-list-header>
+        <ion-item (click)="sort()" [button]="true" [detail]="false">
+          <ion-label>Data</ion-label>
+        </ion-item>
+        <ion-item [button]="true" [detail]="false">
+          <ion-label>Sede</ion-label>
+        </ion-item>
+      </ion-list>
+    </ion-content>
+  </ng-template>
+</ion-popover>

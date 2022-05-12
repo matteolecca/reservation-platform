@@ -1,10 +1,10 @@
-<ion-header>
+<ion-header class="ion-no-border">
   <ion-toolbar>
-    <ion-title>Login</ion-title>
+    <ion-title></ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content class="ion-padding">
+<ion-content fullscreen class="ion-padding">
   <form [formGroup]="form">
     <ion-grid>
       <ion-row>
@@ -13,34 +13,69 @@
         </ion-col>
       </ion-row>
       <ion-row>
-        <ion-col size-sm="6" offset-sm="3">
-          <ion-list>
-            <ion-item>
-              <ion-label position="floating">E-Mail</ion-label>
-              <ion-input formControlName="email" placeholder="E-Mail" type="email" name="email"></ion-input>
-            </ion-item>
-            <ion-item>
-              <ion-label position="floating">Password</ion-label>
-              <ion-input formControlName="password" placeholder="password" type="password" name="password"></ion-input>
-            </ion-item>
-          </ion-list>
+        <ion-col size="12">
+          <ion-item lines="none">
+            <ion-text >
+              <h3 style="font-weight: 700;">LOGIN</h3>
+            </ion-text>
+          </ion-item>
         </ion-col>
       </ion-row>
       <ion-row>
+        <ion-col size="12">
+          <ion-item class="input" lines="none">
+          <!-- <ion-label position="floating">E-Mail</ion-label> -->
+          <ion-input formControlName="email" placeholder="E-Mail" type="email" name="email"></ion-input>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+      <ion-row>
+        <ion-col size="12">
+          <ion-item class="input" lines="none">
+          <!-- <ion-label position="floating">Password</ion-label> -->
+          <ion-input formControlName="password" placeholder="password" type="password" name="password"></ion-input>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+      <ion-row>
         <ion-col size="6">
-          <ion-button type="link" routerLink="/signup" routerDirection="forward" color="primary" fill="clear" expand="block">
-           Signup
-          </ion-button>
+          <!-- <ion-button type="link" routerLink="/signup" routerDirection="forward" color="primary" fill="clear"
+            expand="block">
+            Signup
+          </ion-button> -->
         </ion-col>
-        <ion-col size="6" >
-          <ion-button type="button" color="primary" fill="clear" expand="block" >
-           Forgot Password?
+        <ion-col size="6">
+          <ion-button type="button" color="primary" fill="clear" expand="block">
+            Forgot Password?
           </ion-button>
         </ion-col>
       </ion-row>
-      <ion-button (click)="onSubmit()" [disabled]="!form.valid" class="submit-button" type="submit" color="primary" expand="block">
-        Login
-      </ion-button>
+      <ion-row>
+        <ion-col size="12">
+          <ion-button (click)="onSubmit()" [disabled]="!form.valid" class="submit-button" type="submit" color="primary"
+            expand="block">
+            Login
+          </ion-button>
+        </ion-col>
+      </ion-row>
+      <ion-row style="margin: 25px 0;">
+        <ion-col size="12">
+          <div class="divider">
+            <span></span>
+            <label>OR</label>
+            <span></span>
+          </div>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size="12" class="signup-row">
+            <span>New To DRP?</span>
+          <ion-button type="link" routerLink="/signup" routerDirection="forward" color="primary" fill="clear"
+            expand="block">
+            Signup
+          </ion-button>
+        </ion-col>
+      </ion-row>
     </ion-grid>
   </form>
 

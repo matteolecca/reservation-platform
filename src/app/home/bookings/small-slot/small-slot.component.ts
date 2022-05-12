@@ -18,7 +18,7 @@ export class SmallSlotComponent implements OnInit {
   ngOnInit() { }
 
   click() {
-    this.presentModal({ slotId: this.slot.id });
+    this.presentModal(this.slot);
     this.tap.tapSelect();
   }
 

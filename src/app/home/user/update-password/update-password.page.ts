@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { NavController } from '@ionic/angular';
-import { AuthApiService } from 'src/app/services/api/auth-api.service';
+import { AuthApiService } from 'src/app/api/auth-api.service';
 import { LoadingControllerService } from 'src/app/services/loading-controller.service';
 import { PasswordValidatorService } from 'src/app/services/password-validator.service';
 import { TapService } from 'src/app/services/tap.service';

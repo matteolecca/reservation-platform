@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { AlertController, NavController } from '@ionic/angular';
 import { User } from 'src/app/interfaces/user';
-import { AuthApiService } from 'src/app/services/api/auth-api.service';
+import { AuthApiService } from 'src/app/api/auth-api.service';
 import { LoadingControllerService } from 'src/app/services/loading-controller.service';
 import { StorageService } from 'src/app/services/storage.service';
 import { TapService } from 'src/app/services/tap.service';
 import { ToastService } from 'src/app/services/toast.service';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-user',
@@ -22,7 +23,7 @@ export class UserPage implements OnInit {
     private toastService: ToastService,
     private alertController: AlertController,
     private storageService: StorageService,
-    private loadingControllerService: LoadingControllerService,
+    private authService: AuthService,
     private tap: TapService
   ) { }
 
@@ -50,16 +51,6 @@ export class UserPage implements OnInit {
     }
   };
 
-  logoutUser = async () => {
-    const spinner = await this.loadingControllerService.setupLoadingController('logging tou out...');
-    await this.storageService.unset('token');
-    spinner.present();
-    setTimeout(() => {
-      this.navController.navigateRoot('/login');
-      spinner.dismiss();
-    }, 1000);
-  };
-
   async presentLogoutModal() {
     const alert = await this.alertController.create({
       cssClass: 'my-custom-class',
@@ -73,7 +64,7 @@ export class UserPage implements OnInit {
         }, {
           text: 'Logout',
           id: 'confirm-button',
-          handler: this.logoutUser
+          handler: this.authService.logout
         }
       ]
     });
