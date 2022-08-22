@@ -1,6 +1,5 @@
-import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
-import { AnimationController, IonModal, IonRouterOutlet, ModalController, RefresherCustomEvent } from '@ionic/angular';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { ModalController } from '@ionic/angular';
 import { Subscription } from 'rxjs';
 import { Booking } from 'src/app/interfaces/booking';
 import { BookingsApiService } from 'src/app/api/bookings-api.service';
@@ -23,13 +22,11 @@ export class BookingsPage implements OnInit, OnDestroy {
   bookingSubject: Subscription;
   constructor(
     private modalCtrl: ModalController,
-    private bookingsService: BookingsService,
+    bookingsService: BookingsService,
     private bookingsApiService: BookingsApiService,
     private toastService: ToastService,
-    private tap: TapService,
-    private animationController: AnimationController
-  ) {
-    this.bookingSubject = bookingsService.getBookingSubject().subscribe((subscription) => {
+    private tap: TapService  ) {
+    this.bookingSubject = bookingsService.getBookingSubject().subscribe(() => {
       this.getBookings();
     });
   }
@@ -42,15 +39,13 @@ export class BookingsPage implements OnInit, OnDestroy {
   getBookings = async (event?: any) => {
     this.loading = true;
     this.error = false;
-    const toast = await this.toastService.setupToast('Loading error');
     try {
       const bookings = await this.bookingsApiService.getBookings().toPromise();
-      console.log(bookings);
       this.nextBooking = bookings[0];
       this.bookings = bookings;
     } catch (error) {
       this.error = true;
-      toast.present();
+      (await this.toastService.setupToast('Loading error')).present();
     }
     finally {
       setTimeout(() => {

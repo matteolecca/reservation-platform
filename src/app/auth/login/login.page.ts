@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Keyboard, KeyboardResize } from '@capacitor/keyboard';
+import { Keyboard } from '@capacitor/keyboard';
 import { NavController, Platform } from '@ionic/angular';
 import { AuthApiService } from 'src/app/api/auth-api.service';
 import { LoadingControllerService } from 'src/app/services/loading-controller.service';

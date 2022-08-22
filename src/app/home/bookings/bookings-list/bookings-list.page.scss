@@ -1,13 +1,19 @@
-ion-toolbar{
+ion-toolbar {
    --background: transparent;
-
    --ion-color-base: transparent !important;
 }
-.popup{
- ion-list-header{
-    --background: var(--ion-color-step-100);
- }
-     ion-item{
-        --background: var(--ion-color-step-100);
-     }
+.popup {
+   ion-list-header {
+      --background: var(--ion-color-step-100);
+   }
+   ion-item {
+      --background: var(--ion-color-step-100);
+   }
+}
+
+ion-list-header,
+ion-list,
+ion-grid,
+ion-item {
+   --background: var(--ion-background-color);
 }

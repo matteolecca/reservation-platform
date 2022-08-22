@@ -5,7 +5,6 @@ import { LoadingController } from '@ionic/angular';
   providedIn: 'root'
 })
 export class LoadingControllerService {
-  private spinner: HTMLIonLoadingElement;
   constructor(
     private loadingController: LoadingController,
   ) { }

@@ -1,9 +1,0 @@
-{
-    "version": 3,
-    "mappings": "AAAA,AAAA,eAAe,CAAA;EACX,eAAe,CAAA,IAAC;CACnB;;AACD,AAAA,gBAAgB,CAAA;EACZ,KAAK,EAAE,GAAG;EACV,MAAM,EAAE,KAAK;EACb,aAAa,EAAE,IAAI;EACnB,MAAM,EAAG,SAAS;CACrB",
-    "sources": [
-        "user-skeleton.component.scss"
-    ],
-    "names": [],
-    "file": "user-skeleton.component.css"
-}

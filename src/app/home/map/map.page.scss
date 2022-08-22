@@ -1,0 +1,41 @@
+capacitor-google-map {
+    display: inline-block;
+    width: 100%;
+    height: 70vh;
+}
+ion-item,
+ion-button,
+ion-list {
+    --background: var(--ion-background-color);
+}
+ion-card {
+    --background: var(--ion-color-step-100);
+    ion-item,
+    ion-button {
+        --background: var(--ion-color-step-100);
+    }
+}
+iframe {
+    height: 50vh;
+    width: 100%;
+}
+.sites-list-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    height: 100vh;
+    width: 100%;
+    z-index: 3;
+    animation: show 0.5s forwards;
+    background: var(--ion-background-color);
+    overflow: hidden;
+}
+@keyframes show {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}

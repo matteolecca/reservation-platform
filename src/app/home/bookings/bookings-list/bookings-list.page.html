@@ -7,13 +7,13 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content class="ion-padding">
+<ion-content>
   <!-- <ion-refresher [disabled]="!loadComplete" slot="fixed" (ionRefresh)="loadMoreData($event)" pullFactor="0.8"
     pullMin="60" pullMax="120">
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher> -->
   <ion-list *ngIf="slots">
-    <ion-list-header>
+    <ion-list-header class="ion-padding">
       <ion-label>Past Bookings</ion-label>
       <ion-buttons >
         <ion-button (click)="loadBookings(0)">
@@ -36,7 +36,7 @@
       </ion-item>
       <ion-item-options side="end">
         <ion-item-option color="danger" (click)="onDelete(slot.id)">
-            <ion-icon name="trash"></ion-icon>
+            <ion-icon  class="ion-padding"  name="trash"></ion-icon>
         </ion-item-option>
       </ion-item-options>
     </ion-item-sliding>

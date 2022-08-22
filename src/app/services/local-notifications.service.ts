@@ -10,7 +10,7 @@ export class LocalNotificationsService {
   async showLocalNotification() {
     console.log('Scheduling notification');
     try {
-      const n = await LocalNotifications.schedule({
+      await LocalNotifications.schedule({
         notifications: [
           {
             title: 'Titlolsd',
@@ -20,7 +20,6 @@ export class LocalNotificationsService {
           }
         ]
       });
-      console.log('SCHEDULED');
     } catch (error) {
       console.log(error.message, 'ERROR');
     }

@@ -1,36 +1,35 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Your Booked slots</ion-title>
+    <ion-img style="width: 50px;" src="../../../assets/icon/logo.png"></ion-img>
+    <ion-title slot="primary">Le tue prenotazioni</ion-title>
   </ion-toolbar>
 </ion-header>
+
 <ion-content>
   <ion-refresher slot="fixed" (ionRefresh)="getBookings($event)" pullFactor="0.8" pullMin="60" pullMax="120">
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Booked Slots</ion-title>
-    </ion-toolbar>
-  </ion-header>
   <app-big-slot *ngIf="bookings?.length" [slot]="this.nextBooking" [loading]="this.loading" [openSlot]="presentModal">
   </app-big-slot>
+
   <ion-list *ngIf="bookings?.length">
     <ion-list-header>
-      <ion-label>Next Slots</ion-label>
-      <ion-button routerLink="bookings-list">See past slots</ion-button>
+      <ion-label>Future</ion-label>
+      <ion-button routerLink="bookings-list">Vedi passate</ion-button>
     </ion-list-header>
     <app-small-slot *ngFor="let slot of bookings?.slice(1,bookings.length )" [slot]="slot" [presentModal]="presentModal"
       [loading]="this.loading">
     </app-small-slot>
-    <ion-grid fixed>
-      <div class="empty" *ngIf="!loading && bookings.length <= 1">
+    <ion-grid fixed *ngIf="!loading && bookings.length <= 1">
+      <div class="empty">
         <ion-img src="../../../assets/icon/no-slots-icon.svg"></ion-img>
         <ion-text class="ion-text-center" color="primary">
-          <p>No scheduled bookings...</p>
+          <p>Nessuna prenotazione...</p>
         </ion-text>
       </div>
     </ion-grid>
   </ion-list>
+
   <app-empty *ngIf="(!bookings || !bookings.length) && !loading"></app-empty>
   <app-slots-sleketon *ngIf="loading"></app-slots-sleketon>
 </ion-content>

@@ -16,7 +16,6 @@ $RECYCLE.BIN/
 *.log
 log.txt
 npm-debug.log*
-
 /.angular
 /.idea
 /.ionic
@@ -31,6 +30,3 @@ npm-debug.log*
 /plugins
 /www
 /android
-/ios
-ios
-.ios

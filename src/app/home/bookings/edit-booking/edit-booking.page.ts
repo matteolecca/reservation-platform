@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { LoadingController, ModalController, NavParams } from '@ionic/angular';
+import { ModalController, NavParams } from '@ionic/angular';
 import { Booking } from 'src/app/interfaces/booking';
 import { AltertService } from 'src/app/services/alert.service';
 import { BookingsApiService } from 'src/app/api/bookings-api.service';
@@ -45,15 +45,12 @@ export class EditBookingPage implements OnInit {
   }
   async deleteBooking(id: number) {
     const spinner = await this.loadingController.setupLoadingController('Deleting...');
-    const toast = await this.toastService.setupToast('Error deleting');
-    const toastSuccess = await this.toastService.setupToast('Deleted', 2000, 'success');
     spinner.present();
     try {
       await this.bookingApiService.deleteBooking(id).toPromise();
-      toastSuccess.present();
+      (await this.toastService.setupToast('Deleted', 2000, 'success')).present();
     } catch (error) {
-      console.error('ERROr deleting');
-      toast.present();
+      (await this.toastService.setupToast('Error deleting')).present();
     }
     finally {
       this.modalController.dismiss();

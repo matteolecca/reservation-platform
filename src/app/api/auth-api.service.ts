@@ -4,6 +4,7 @@ import { LoginUser } from 'src/app/interfaces/loginUser';
 import { User } from 'src/app/interfaces/user';
 import { SignupUser } from 'src/app/interfaces/signup-user';
 import { environment } from 'src/environments/environment';
+import { Site } from '../home/map/types';
 @Injectable({
   providedIn: 'root'
 })
@@ -29,5 +30,11 @@ export class AuthApiService {
   }
   updatePassword(password: string) {
     return this.httpClient.post<any>(`${environment.baseUrl}/users/update-password`, { password });
+  }
+  getLocation(coords: { lat: number; lng: number }){
+    return this.httpClient.get<any>(`${environment.baseUrl}/places?lat=${coords.lat}&lng=${coords.lng}`);
+  }
+  getSites(){
+    return this.httpClient.get<Site[]>(`${environment.baseUrl}/places/sites`);
   }
 }

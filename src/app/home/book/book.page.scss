@@ -37,9 +37,12 @@ ion-modal ion-datetime {
   ion-button{
     animation: show 1s forwards;
   }
-  ion-p{
+  ion-text{
     animation: show 1s forwards;
   }
+}
+ion-item{
+  --background: var(--ion-background-color);
 }
 @keyframes show{
   from {

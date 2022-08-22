@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { AlertController, NavController } from '@ionic/angular';
+import { AlertController } from '@ionic/angular';
 import { User } from 'src/app/interfaces/user';
 import { AuthApiService } from 'src/app/api/auth-api.service';
-import { LoadingControllerService } from 'src/app/services/loading-controller.service';
-import { StorageService } from 'src/app/services/storage.service';
 import { TapService } from 'src/app/services/tap.service';
 import { ToastService } from 'src/app/services/toast.service';
 import { AuthService } from 'src/app/services/auth.service';
@@ -19,10 +17,8 @@ export class UserPage implements OnInit {
   error: boolean;
   constructor(
     private authApiService: AuthApiService,
-    private navController: NavController,
     private toastService: ToastService,
     private alertController: AlertController,
-    private storageService: StorageService,
     private authService: AuthService,
     private tap: TapService
   ) { }

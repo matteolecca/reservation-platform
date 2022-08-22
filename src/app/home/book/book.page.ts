@@ -1,16 +1,14 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
-import { withModule } from '@angular/core/testing';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Animation, AnimationController, IonDatetime, IonModal, LoadingController, ModalController, NavController } from '@ionic/angular';
+import { IonDatetime, IonModal, NavController } from '@ionic/angular';
 import { Desk } from 'src/app/interfaces/desks';
 import { Offices } from 'src/app/interfaces/offices';
-import { AltertService } from 'src/app/services/alert.service';
 import { BookingsApiService } from 'src/app/api/bookings-api.service';
 import { BookingsService } from 'src/app/services/bookings.service';
 import { LoadingControllerService } from 'src/app/services/loading-controller.service';
-import { OfficesService } from 'src/app/services/offices.service';
 import { TapService } from 'src/app/services/tap.service';
 import { ToastService } from 'src/app/services/toast.service';
+import { AuthApiService } from 'src/app/api/auth-api.service';
 
 @Component({
   selector: 'app-book',
@@ -23,6 +21,7 @@ export class BookPage implements AfterViewInit, OnInit {
   loading: boolean;
   loadingDesks: boolean;
   offices: Offices[];
+  sites: any;
   desks: Desk[];
   form: FormGroup;
   booked: boolean;
@@ -30,17 +29,14 @@ export class BookPage implements AfterViewInit, OnInit {
   showDate = false;
   showClass = 'show';
   constructor(
-    private officeService: OfficesService,
+    private officeService: AuthApiService,
     private formBuilder: FormBuilder,
     private boookingsApiService: BookingsApiService,
     private loadingController: LoadingControllerService,
     private navController: NavController,
     private toastService: ToastService,
     private tap: TapService,
-    private bookingsService: BookingsService,
-    private modalController: ModalController,
-    private animationCtrl: AnimationController
-  ) {
+    private bookingsService: BookingsService  ) {
   }
   ngOnInit(): void {
     this.setForm();
@@ -48,16 +44,16 @@ export class BookPage implements AfterViewInit, OnInit {
   }
 
   registerModalSubscriptions() {
-    this.ionModal?.willDismiss.subscribe(e => {
+    this.ionModal?.willDismiss.subscribe(() => {
       this.showClass = 'hide';
     });
-    this.ionModal?.willPresent.subscribe(e => this.showClass = 'show');
+    this.ionModal?.willPresent.subscribe(() => this.showClass = 'show');
 
   }
 
   ngAfterViewInit(): void {
     this.registerModalSubscriptions();
-    this.form.valueChanges.subscribe((formValues) => {
+    this.form.valueChanges.subscribe(() => {
       this.setDate();
     });
   }
@@ -86,7 +82,7 @@ export class BookPage implements AfterViewInit, OnInit {
   loadDesks = async () => {
     this.loadingDesks = true;
     try {
-      this.desks = await this.officeService.loadDesks();
+      this.desks = [1, 23, 4].map(d => ({ id: d, nr: d }));
     } catch (error) {
     }
     finally {
@@ -97,8 +93,10 @@ export class BookPage implements AfterViewInit, OnInit {
   loadOffices = async () => {
     this.loading = true;
     try {
-      this.offices = await this.officeService.loadOffices();
+      this.sites = await this.officeService.getSites().toPromise();
+      this.offices = this.sites.map(({ id, siteName }: any) => ({ id, officeTitle: siteName }));
     } catch (error) {
+      console.log(error);
     }
     finally {
       this.loading = false;

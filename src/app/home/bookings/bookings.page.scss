@@ -1,8 +1,13 @@
 .empty{
+    --background: var(--ion-background-color);
     margin-top: 50px;
     ion-img{
         width: 60%;
         max-width: 400px;
         margin: 0 auto;
     }
+}
+ion-list-header, ion-list, ion-grid {
+    --background: var(--ion-background-color);
+    background: var(--ion-background-color);
 }

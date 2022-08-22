@@ -11,7 +11,7 @@ ion-img{
     max-width: 200px;
     margin: 20px auto;
 }
-ion-toolbar{
+ion-toolbar, ion-text{
     --background: transparent;
 
     --ion-color-base: transparent !important;
@@ -56,4 +56,9 @@ form{
 
 :root{
     transition: all .5s;
+}
+ion-content,
+ion-item,
+ion-list-header{
+    --background: var(--ion-background-color);
 }

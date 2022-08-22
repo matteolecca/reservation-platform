@@ -1,18 +1,18 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>book</ion-title>
+    <ion-img slot="start" style="width: 50px;" src="../../../assets/icon/logo.png"></ion-img>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
   <ion-header collapse="condense">
     <ion-toolbar>
-      <ion-title size="large">Book</ion-title>
+      <ion-title size="large">Prenota</ion-title>
     </ion-toolbar>
   </ion-header>
   <form *ngIf="!booked" [formGroup]="form" (ngSubmit)="onSubmit()" novalidate>
     <ion-item class="form-item" (click)="itemTap()" *ngIf="offices">
-      <ion-label>Office</ion-label>
+      <ion-label>Sede</ion-label>
       <ion-select formControlName="site" placeholder="Select Office">
         <ion-select-option *ngFor="let office of offices" [value]="office.id">{{office.officeTitle}}</ion-select-option>
       </ion-select>
@@ -38,11 +38,11 @@
       <ion-skeleton-text animated style="width: 100%; height: 35px;"></ion-skeleton-text>
     </ion-item>
     <ion-button [disabled]="!this.form.valid" class="ion-padding" (click)="onSubmit()" expand="block">
-      Book
+      Prenota
     </ion-button>
     <ion-modal #ionModal trigger="date" *ngIf="this.form.controls.site.valid">
       <ng-template>
-        <ion-datetime [ngClass]="[showClass]" ion-datetime [isDateEnabled]="dateEnabled"
+        <ion-datetime prefer-wheel=”true” [ngClass]="[showClass]" ion-datetime [isDateEnabled]="dateEnabled"
           formControlName="date" #dateTime presentation="date" showDefaultButtons=true [min]="minDate"
           first-day-of-week="1"></ion-datetime>
       </ng-template>
@@ -52,10 +52,10 @@
     <div class="confirm">
       <ion-img src="../../../assets/icon/done-icon.svg"></ion-img>
       <ion-text color="primary">
-        <p>Booked reservation confirmed</p>
+        <p>Prenotazione confermata</p>
       </ion-text>
       <ion-button (click)="navigateAway()" expand="block">
-        Go to My Bookings
+        Vai alle mie prenotazioni
       </ion-button>
     </div>
   </ion-content>

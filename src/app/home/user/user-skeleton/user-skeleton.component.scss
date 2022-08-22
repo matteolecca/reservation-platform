@@ -3,7 +3,10 @@
 }
 .button-skeleton{
     width: 90%;
-    height: 2.8em;
-    border-radius: 10px;
+    height: 1.5em;
+    border-radius: 6px;
     margin:  16px auto;
+}
+ion-item{
+    --background: var(--ion-background-color);
 }

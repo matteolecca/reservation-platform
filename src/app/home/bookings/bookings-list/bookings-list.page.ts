@@ -1,10 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { LocalNotifications } from '@capacitor/local-notifications';
-import { IonInfiniteScroll, LoadingController } from '@ionic/angular';
+import { IonInfiniteScroll } from '@ionic/angular';
 import { Booking } from 'src/app/interfaces/booking';
 import { AltertService } from 'src/app/services/alert.service';
 import { BookingsApiService } from 'src/app/api/bookings-api.service';
-import { BookingsService } from 'src/app/services/bookings.service';
 import { LoadingControllerService } from 'src/app/services/loading-controller.service';
 import { LocalNotificationsService } from 'src/app/services/local-notifications.service';
 import { ToastService } from 'src/app/services/toast.service';
@@ -21,7 +19,6 @@ export class BookingsListPage implements OnInit {
   loadComplete = false;
   constructor(
     private bookingsApiService: BookingsApiService,
-    private bookingsService: BookingsService,
     private loadingController: LoadingControllerService,
     private toastService: ToastService,
     private alertService: AltertService,
@@ -80,8 +77,8 @@ export class BookingsListPage implements OnInit {
       this.infiniteScroll.disabled = false;
     }
   }
-  async onPageEnd(event) {
-    if (this.slots.length < (this.limit * (this.offset + 1))) {
+  async onPageEnd(event?: any) {
+    if (this.slots.length < (this.limit + this.offset)) {
       this.loadComplete = true;
       this.infiniteScroll.disabled = true;
     }
