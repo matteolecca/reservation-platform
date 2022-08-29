@@ -48,7 +48,6 @@ export class BookPage implements AfterViewInit, OnInit {
       this.showClass = 'hide';
     });
     this.ionModal?.willPresent.subscribe(() => this.showClass = 'show');
-
   }
 
   ngAfterViewInit(): void {

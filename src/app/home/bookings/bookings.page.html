@@ -11,7 +11,6 @@
   </ion-refresher>
   <app-big-slot *ngIf="bookings?.length" [slot]="this.nextBooking" [loading]="this.loading" [openSlot]="presentModal">
   </app-big-slot>
-
   <ion-list *ngIf="bookings?.length">
     <ion-list-header>
       <ion-label>Future</ion-label>

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import {  NavController } from '@ionic/angular';
+import { Keyboard, KeyboardResize } from '@capacitor/keyboard';
+import { NavController } from '@ionic/angular';
 import { AuthApiService } from 'src/app/api/auth-api.service';
 import { LoadingControllerService } from 'src/app/services/loading-controller.service';
 import { PasswordValidatorService } from 'src/app/services/password-validator.service';
@@ -14,6 +15,33 @@ import { ToastService } from 'src/app/services/toast.service';
 })
 export class SignupPage implements OnInit {
   form: FormGroup;
+  inputList = [
+    {
+      formControlName: 'username',
+      placeholder: 'Username',
+      type: 'text',
+      name: 'email',
+      controls: ['', [Validators.required]]
+    },
+    {
+      formControlName: 'email',
+      placeholder: 'Email',
+      type: 'email',
+      controls: ['', [Validators.required, Validators.email]],
+    },
+    {
+      formControlName: 'password',
+      placeholder: 'Password',
+      type: 'password',
+      controls: ['', [Validators.required]],
+    },
+    {
+      formControlName: 'repeatPassword',
+      placeholder: 'Repeat Password',
+      type: 'password',
+      controls: ['', [Validators.required, this.passwordValidatorsService.checkValidator()]],
+    }
+  ];
   constructor(
     private loadingControllerService: LoadingControllerService,
     private toastService: ToastService,
@@ -26,14 +54,14 @@ export class SignupPage implements OnInit {
 
   ngOnInit() {
     this.setForm();
+    Keyboard.setResizeMode({ mode: KeyboardResize.Body });
   }
   setForm() {
-    this.form = this.formBuilder.group({
-      username: ['', [Validators.required]],
-      email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required]],
-      repeatPassword: ['', [Validators.required, this.passwordValidatorsService.checkValidator()]],
-    });
+    const formControls = this.inputList.reduce((acc, { formControlName, controls }) => {
+      acc[formControlName] = controls;
+      return acc;
+    }, {});
+    this.form = this.formBuilder.group(formControls);
   }
   async onSubmit() {
     const spinner = await this.loadingControllerService.setupLoadingController('Logging you in');

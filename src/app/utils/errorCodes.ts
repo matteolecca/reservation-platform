@@ -1,0 +1,1 @@
+export const BIOMETHRIC_NOT_ENROLLED = -106;

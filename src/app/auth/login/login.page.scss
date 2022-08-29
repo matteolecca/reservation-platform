@@ -1,19 +1,5 @@
-:root{
-    height: 100%;
-    
-}
-
-ion-button{
-    width: fit-content;
-}
-ion-img{
-    width: 60%;
-    max-width: 200px;
-    margin: 20px auto;
-}
 ion-toolbar, ion-text{
     --background: transparent;
-
     --ion-color-base: transparent !important;
 }
 .input{
@@ -28,7 +14,9 @@ ion-toolbar, ion-text{
     display: flex;
     align-items: center;
     justify-content: center;
+    margin: 25px 0;
     span{
+        width: 100%;
         flex: 1 1;
         height: .5px;
         background: var(--ion-color-step-200);
@@ -39,21 +27,6 @@ ion-toolbar, ion-text{
         color: var(--ion-color-step-500);
     }
 }
-.signup-row{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-form{
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-.submit-button{
-    width: 100%;
-}
-
 :root{
     transition: all .5s;
 }

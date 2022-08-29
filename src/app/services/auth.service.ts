@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Capacitor } from '@capacitor/core';
 import { NavController } from '@ionic/angular';
 import { AuthApiService } from '../api/auth-api.service';
 import { LoadingControllerService } from './loading-controller.service';
@@ -34,7 +35,9 @@ export class AuthService {
         if (!isValidToken) {
           return this.navController.navigateRoot('/login');
         }
-        this.pushService.requestPermission();
+        if(Capacitor.isNativePlatform()){
+          this.pushService.requestPermission();
+        }
         this.navController.navigateRoot('/home/bookings');
       } catch (error) {
         if(!error.status){

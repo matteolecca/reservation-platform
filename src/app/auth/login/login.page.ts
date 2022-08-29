@@ -1,8 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Keyboard } from '@capacitor/keyboard';
-import { NavController, Platform } from '@ionic/angular';
 import { AuthApiService } from 'src/app/api/auth-api.service';
+import { AuthService } from 'src/app/services/auth.service';
 import { LoadingControllerService } from 'src/app/services/loading-controller.service';
 import { StorageService } from 'src/app/services/storage.service';
 import { ToastService } from 'src/app/services/toast.service';
@@ -19,14 +18,12 @@ export class LoginPage implements OnInit, OnDestroy {
   constructor(
     private formBuilder: FormBuilder,
     private authApiService: AuthApiService,
-    private navController: NavController,
+    private authService: AuthService,
     private loadingControllerService: LoadingControllerService,
     private toastService: ToastService,
     private storageService: StorageService,
-    private platform: Platform
   ) { }
   ngOnDestroy(): void {
-    Keyboard.removeAllListeners();
   }
 
   ngOnInit() {
@@ -34,22 +31,7 @@ export class LoginPage implements OnInit, OnDestroy {
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6)]]
     });
-    // this.kList();
   }
-
-  kList() {
-    Keyboard.addListener('keyboardWillShow', keyboard => {
-      const { keyboardHeight } = keyboard;
-      const h = this.platform.height() - (keyboardHeight);
-      document.body.style.height = `${h}px`;
-    });
-
-    Keyboard.addListener('keyboardWillHide', () => {
-      const h = this.platform.height();
-      document.body.style.height = `${h}px`;
-    });
-  }
-
 
   signup() { }
   async onSubmit() {
@@ -59,7 +41,7 @@ export class LoginPage implements OnInit, OnDestroy {
     try {
       const { token } = await this.authApiService.login(this.form.value).toPromise();
       this.storageService.set('token', token);
-      this.navController.navigateRoot('/home');
+      await this.authService.checkToken();
     } catch (error) {
       this.toast.present();
     }

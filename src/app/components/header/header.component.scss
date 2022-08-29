@@ -1,0 +1,10 @@
+ion-img {
+    width: 60%;
+    max-width: 200px;
+    margin: 10px auto;
+}
+ion-content,
+ion-item,
+ion-list-header {
+    --background: var(--ion-background-color);
+}

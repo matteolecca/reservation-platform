@@ -31,10 +31,10 @@ export class MapPage {
   ) { }
   async ionViewDidEnter() {
     this.headerHeight = this.header.el.offsetHeight;
-    if (!this.mapUrl) {
+    // if (!this.mapUrl) {
       await this.loadNearSite();
       await this.loadSites();
-    }
+    // }
   }
   triggerSuggestions(trigger?: boolean, event?: any) {
     if (event) {
@@ -70,6 +70,8 @@ export class MapPage {
     const lc = await this.loadingController.setupLoadingController('Map Loading...');
     lc.present();
     try {
+      const result = await Geolocation.requestPermissions();
+      console.log(result);
       const { coords } = await Geolocation.getCurrentPosition();
       const coordinates = { lat: siteCoords ? siteCoords.x : coords.latitude, lng: siteCoords ? siteCoords.y : coords.longitude };
       const { name, vicinity, url } = await this.locationApi.getLocation(coordinates).toPromise();

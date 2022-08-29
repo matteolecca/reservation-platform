@@ -4,60 +4,28 @@
 </ion-header>
 
 <ion-content class="ion-padding">
-  <form [formGroup]="form" >
-    <ion-grid>
-      <ion-row>
-        <ion-col size="12">
-          <ion-img src="../../../assets/icon/login-icon.svg"></ion-img>
-        </ion-col>
-      </ion-row>
-      <ion-row>
-        <ion-col size="12">
-          <ion-item lines="none">
-            <ion-text>
-              <h3 style="font-weight: 700;">SIGNUP</h3>
-            </ion-text>
-          </ion-item>
-        </ion-col>
-      </ion-row>
-      <ion-row>
-        <ion-col size-sm="6" offset-sm="3">
-          <ion-list>
-            <ion-item>
-              <ion-label position="floating">Username</ion-label>
-              <ion-input formControlName="username" placeholder="Username" type="email" name="email"></ion-input>
-            </ion-item>
-            <ion-item>
-              <ion-label position="floating">E-Mail</ion-label>
-              <ion-input formControlName="email" placeholder="E-Mail" type="email" name="email"></ion-input>
-            </ion-item>
-            <ion-item>
-              <ion-label position="floating">Password</ion-label>
-              <ion-input formControlName="password" placeholder="password" type="password" name="password"></ion-input>
-            </ion-item>
-            <ion-item>
-              <ion-label position="floating">Repeat Password</ion-label>
-              <ion-input formControlName="repeatPassword" placeholder="Repeat Password" type="password" name="password"></ion-input>
-            </ion-item>
-          </ion-list>
-        </ion-col>
-      </ion-row>
-      <ion-row>
-        <ion-col size="6">
-          <ion-button type="link" routerLink="/login" routerDirection="back" olor="primary" fill="clear" expand="block">
-           Login
-          </ion-button>
-        </ion-col>
-        <ion-col size="6" >
-          <ion-button type="button" color="primary" fill="clear" expand="block" >
-           Forgot Password?
-          </ion-button>
-        </ion-col>
-      </ion-row>
-      <ion-button (click)="onSubmit()" role="submit" [disabled]="!form.valid" class="submit-button" type="submit" color="primary" expand="block">
+  <form [formGroup]="form">
+    <app-header title="SIGNUP"></app-header>
+    <ion-list>
+      <ion-item *ngFor="let input of inputList">
+        <ion-label position="floating">{{input.placeholder}}</ion-label>
+        <ion-input [formControlName]="input.formControlName" [placeholder]="input.placeholder" [type]="input.type">
+        </ion-input>
+      </ion-item>
+      <ion-item lines="none">
+        <ion-button slot="start" type="link" routerLink="/login" routerDirection="back" olor="primary" fill="clear"
+          expand="block">
+          Login
+        </ion-button>
+        <ion-button slot="end" type="button" color="primary" fill="clear" expand="block">
+          Forgot Password?
+        </ion-button>
+      </ion-item>
+      <ion-button (click)="onSubmit()" role="submit" [disabled]="!form.valid" class="submit-button" type="submit"
+        color="primary" expand="block">
         Signup
       </ion-button>
-    </ion-grid>
+    </ion-list>
   </form>
 
 </ion-content>

@@ -9,14 +9,17 @@
   </ion-toolbar>
 </ion-header>
 <ion-content fullscreen>
-
   <ion-refresher (ionRefresh)="loadNearSite($event)" slot="fixed" pullFactor="0.8" pullMin="60" pullMax="120">
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
   <ion-backdrop style="opacity: .7; z-index: 1;" (click)="triggerSuggestions(false)" *ngIf="suggShowed">
   </ion-backdrop>
-    <div class="sites-list-container" [ngStyle]="{'padding-top': headerHeight + 'px'}" *ngIf="suggShowed">
-      <ion-list class="sites-list" >
+  <div class="sites-list-container" [ngStyle]="{'padding-top': headerHeight + 'px'}" *ngIf="suggShowed">
+    <ion-list class="sites-list">
+      <ion-list-header>
+        <ion-label>Lista Sedi Spindox</ion-label>
+        <ion-button (click)="triggerSuggestions(false)" size="small" fill="clear" expand="block" color="danger">Chiudi</ion-button>
+      </ion-list-header>
       <ion-item *ngFor="let site of filteredSites" (click)="siteClicked(site.id)">
         <ion-grid fixed>
           <ion-row>
@@ -33,7 +36,7 @@
         </ion-grid>
       </ion-item>
     </ion-list>
-    </div>
+  </div>
   <ion-card class="ion-no-padding">
     <ion-card-header>
       <ion-card-subtitle>Sede più vicina a te</ion-card-subtitle>
