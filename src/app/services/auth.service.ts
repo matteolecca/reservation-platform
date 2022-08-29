@@ -36,7 +36,7 @@ export class AuthService {
           return this.navController.navigateRoot('/login');
         }
         if(Capacitor.isNativePlatform()){
-          this.pushService.requestPermission();
+        this.pushService.requestPermission();
         }
         this.navController.navigateRoot('/home/bookings');
       } catch (error) {

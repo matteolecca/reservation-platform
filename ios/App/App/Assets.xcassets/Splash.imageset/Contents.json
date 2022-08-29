@@ -1,23 +1,23 @@
 {
   "images" : [
     {
+      "filename" : "iPhone_11__iPhone_XR_portrait.png",
       "idiom" : "universal",
-      "filename" : "splash-2732x2732-2.png",
       "scale" : "1x"
     },
     {
+      "filename" : "10.2__iPad_portrait.png",
       "idiom" : "universal",
-      "filename" : "splash-2732x2732-1.png",
       "scale" : "2x"
     },
     {
+      "filename" : "10.2__iPad_landscape.png",
       "idiom" : "universal",
-      "filename" : "splash-2732x2732.png",
       "scale" : "3x"
     }
   ],
   "info" : {
-    "version" : 1,
-    "author" : "xcode"
+    "author" : "xcode",
+    "version" : 1
   }
 }
